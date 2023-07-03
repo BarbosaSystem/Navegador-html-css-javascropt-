@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Home</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <!--
+      Need a visual blank slate?
+      Remove all code in `styles.css`!
+    -->
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    />
+    <script type="module" src="script.js"></script>
+  </head>
+  <body>
+    <section class="nav-container">
+      <div class="nav-titulo">
+        <div class="nav-botoes">
+          <button class="fechar"></button>
+          <button class="maximizar"></button>
+          <button class="minimizar"></button>
+        </div>
+        <h1 class="nav-titulo-texto">Barra de Titutlo</h1>
+      </div>
+      <div class="nav-tarefas">
+        <div class="nav-tarefas-botoes">
+          <button class="arrow-left"><i class="fas fa-arrow-left"></i></button>
+          <button class="arrow-right">
+            <i class="fas fa-arrow-right"></i>
+          </button>
+          <button class="favorites">
+            <i class="fa-sharp fa-solid fa-star"></i>
+          </button>
+          <button class="home"><i class="fas fa-home"></i></button>
+        </div>
+        <div class="nav-tarefas-form">
+          <input type="text" class="nav-tarefas-form-address" />
+          <button class="go-address"></button>
+        </div>
+        <div class="nav-tarefas-options">
+          <button class="bar-options"><i class="fa-solid fa-bars"></i></button>
+          <div class="box-options">
+            <div class="box-options-item"><span>Favoritos</span></div>
+            <div class="box-options-item"><span>Histórico</span></div>
+            <div class="box-options-item"><span>Configurações</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="nav-favoritos">
+        <div class="nav-favoritos-item" data-info="www.youtube.com.br">
+          <img
+            src="https://www.youtube.com/s/desktop/64b0d6dd/img/favicon.ico"
+            alt=""
+            class="img-favoritos"
+          />
+          <span class="title-favoritos">Youtube</span>
+        </div>
+        <div class="nav-favoritos-item" data-info="www.caixa.gov.br">
+          <img
+            src="https://www.caixa.gov.br/Style%20Library/images/favicon.ico"
+            alt=""
+            class="img-favoritos"
+          />
+          <span class="title-favoritos" data-info="www.caixa.gov.br"
+            >Caixa</span
+          >
+        </div>
+      </div>
+      <div class="nav-conteudo">
+        <div class="content-favorites">
+          <div class="content-favorites-bar-title">
+            <i class="fa-sharp fa-solid fa-star"></i>
+            <h5 class="title">Barra de Favoritos</h5>
+            <button><i class="fas fa-times"></i></button>
+          </div>
+          <div class="inputFavorite">
+            <input
+              placeholder="Add to Favorite"
+              type="text"
+              class="form-favorite"
+            />
+            <button class="addFavorite"><i class="fas fa-plus"></i></button>
+          </div>
+          <div class="listFavorite">
+        
+          </div>
+        </div>
+      </div>
+      <div class="nav-status">
+        <span class="status-info">www.globo.com</span>
+      </div>
+    </section>
+  </body>
+</html>
