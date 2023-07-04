@@ -1,4 +1,3 @@
-//Abrir menu de opções
 const buttonBar = document.querySelector('.bar-options');
 const buttonMinimizar = document.querySelector('.minimizar');
 const navContainer = document.querySelector('.nav-container');
@@ -8,6 +7,8 @@ const statusInfo = document.querySelector('.status-info');
 const inputAddress = document.querySelector('.nav-tarefas-form-address');
 const addFavorite = document.querySelector('.addFavorite');
 const buttonFavorite = document.querySelector('.favorites');
+const boxOptions = document.querySelectorAll('.box-options-item')
+const closeFavorite = document.querySelector('.close-favorites')
 
 let listFavorite = [
   {
@@ -20,48 +21,67 @@ let listFavorite = [
   },
 ];
 
+boxOptions.forEach((element) => {
+  element.addEventListener('click', function(event){
+    switch (element.innerText) {
+      case "Favoritos":
+        toggleFavorites()
+        togglePopUp()
+        break;
+    
+      default:
+        break;
+    }
+  })
+})
 document.addEventListener('DOMContentLoaded', function () {
-  // Código da função a ser executada
   console.log('O DOM foi totalmente carregado.');
-
-  // Chame sua função aqui
   LoadFavorites(listFavorite);
 });
 
-//botão de "+" opções
-buttonBar.addEventListener('click', function (event) {
-  togglePopUp();
-});
 
-// botão de minimizar
-buttonMinimizar.addEventListener('click', function (event) {
+closeFavorite.addEventListener('click', function () {
+  toggleFavorites()
+});
+buttonBar.addEventListener('click', togglePopUp);
+
+buttonMinimizar.addEventListener('click', function () {
   navContainer.classList.toggle('minimizar');
 });
 
-buttonFavorite.addEventListener('click', function (event) {
-  toggleFavorites();
-});
+buttonFavorite.addEventListener('click', toggleFavorites);
+
 favoriteItem.forEach((element) => {
-  element.addEventListener('click', (event) => {
+  element.addEventListener('click', function () {
     const info = element.getAttribute('data-info');
     inputAddress.value = info;
   });
-  element.addEventListener('mouseover', (event) => {
+
+  element.addEventListener('mouseover', function (event) {
     const info = event.target.getAttribute('data-info');
     if (info !== null) {
       navStatus.classList.add('on');
-      console.log(info);
       statusInfo.innerHTML = info;
     }
   });
-  element.addEventListener('mouseout', () => {
+
+  element.addEventListener('mouseout', function () {
     navStatus.classList.remove('on');
   });
 });
-addFavorite.addEventListener('click', function (event) {
-  addFavoritefunc();
+
+addFavorite.addEventListener('click', function () {
+  const inputFavorite = document.querySelector('.form-favorite');
+  let random = Math.random();
+  if (inputFavorite.value !== '') {
+    listFavorite.push({ id: random, value: inputFavorite.value });
+  }
+  limparDiv('.listFavorite');
+  LoadFavorites(listFavorite);
+  inputFavorite.value = '';
+  inputFavorite.focus();
 });
-//função
+
 function togglePopUp() {
   const boxOptions = document.querySelector('.box-options');
   boxOptions.classList.toggle('active');
@@ -72,17 +92,14 @@ function toggleFavorites() {
   contentFavorite.classList.toggle('active');
   buttonFavorite.classList.toggle('active');
 }
+
 function createElement(tag, classe) {
   let element = document.createElement(tag);
   if (classe) {
     let lista = classe.split(' ');
-    if (lista.length == 1) {
-      element.classList.add(classe);
-    } else {
-      lista.forEach((item) => {
-        element.classList.add(item);
-      });
-    }
+    lista.forEach((item) => {
+      element.classList.add(item);
+    });
   }
   return element;
 }
@@ -93,6 +110,7 @@ function limparDiv(elementId) {
     div.removeChild(div.firstChild);
   }
 }
+
 function LoadFavorites(listArray) {
   let listFavorite = document.querySelector('.listFavorite');
   listArray.forEach((element) => {
@@ -102,25 +120,36 @@ function LoadFavorites(listArray) {
     let iconRemove = createElement('i', 'fas fa-times');
     pEnd.innerText = element.value;
     removeButtonFavorite.appendChild(iconRemove);
+    removeButtonFavorite.addEventListener('click', function () {
+      removeFavorite(element);
+    });
     itemFavorite.appendChild(pEnd);
     itemFavorite.appendChild(removeButtonFavorite);
     listFavorite.appendChild(itemFavorite);
   });
 }
-// Favoritos
+
+const removeFavorite = (item) => {
+  const indiceObjeto = listFavorite.findIndex((objeto) => objeto.id === item.id);
+
+  if (indiceObjeto !== -1) {
+    listFavorite.splice(indiceObjeto, 1);
+  }
+  limparDiv('.listFavorite');
+  LoadFavorites(listFavorite);
+};
 
 const loadListFavorite = () => {
   return listFavorite;
 };
 
 const loadFavorite = (item) => {
-  let favorite = listFavorite.map((fav) => {
-    return fav.id === item.id;
-  });
-  return favorite;
+  return listFavorite.some((fav) => fav.id === item.id);
 };
+
 const editFavorite = (item) => {
   let selectFavorite = loadFavorite(item);
   if (selectFavorite) {
+    // Lógica para editar o item favorito
   }
 };
